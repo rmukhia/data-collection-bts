@@ -1,0 +1,20 @@
+{
+    "extends": "airbnb",
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "plugins": [
+      "react",
+        "jsx-a11y",
+        "import",
+        "promise"
+    ],
+    "rules": {
+      "no-underscore-dangle": 0,
+      "no-param-reassign": [2, { "props": false }],
+      "react/forbid-prop-types": 0,
+      "class-methods-use-this": 0,
+      "react/jsx-filename-extension": 0,
+    }
+}
