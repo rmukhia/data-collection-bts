@@ -7,10 +7,10 @@ import AppBar from 'material-ui/AppBar';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 
-
 import reducers from './reducers/reducer';
-import Section1 from './components/section-1';
-import Section2 from './components/section-2';
+import Section from './components/section';
+import DestinationCalculator from './components/destination-calculator';
+import Discount from './components/discount';
 
 
 import './App.css';
@@ -31,8 +31,10 @@ const App = () => (
         <AppBar
           title="Project 1"
         />
-        <Route path="/section1" component={Section1} />
-        <Route path="/section2" component={Section2} />
+        <Route path="/section1" render={props => <Section {...props} dataFile="section1.json" nextPage="/section2" />} />
+        <Route path="/section2" render={props => <Section {...props} dataFile="section2.json" nextPage="/destination-calculator" />} />
+        <Route path="/destination-calculator" render={props => <DestinationCalculator {...props} nextPage="/discount" />} />
+        <Route path="/discount" render={props => <Discount {...props} nextPage="/reason" />} />
       </div>
     </Router>
   </Provider>

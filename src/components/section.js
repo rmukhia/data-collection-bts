@@ -13,7 +13,7 @@ const paperStyle = {
   textAlign: 'center',
 };
 
-class Section1 extends React.Component {
+class Section extends React.Component {
   constructor(props) {
     super(props);
     this.state = { questions: [] };
@@ -25,14 +25,14 @@ class Section1 extends React.Component {
 
     this.serverRequest =
             axios
-              .get(`${process.env.PUBLIC_URL}/data/section1.json`)
+              .get(`${process.env.PUBLIC_URL}/data/${_this.props.dataFile}`)
               .then((result) => {
                 _this.setState({ questions: result.data });
               });
   }
 
   onNextClick() {
-    this.props.history.push('/section2');
+    this.props.history.push(this.props.nextPage);
   }
 
   render() {
@@ -57,4 +57,4 @@ class Section1 extends React.Component {
   }
 }
 
-export default Section1;
+export default Section;

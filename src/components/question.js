@@ -61,9 +61,9 @@ class Question extends React.Component {
 
   render() {
     return (
-        <Paper zDepth={1} style={paperStyle}>
+      <Paper zDepth={1} style={paperStyle}>
         <List>
-          <Subheader>{this.props.question}</Subheader>
+          <h4>{this.props.question}</h4>
           {this.props.options.map((el, index) => (
             <ListItem
               primaryText={el}
