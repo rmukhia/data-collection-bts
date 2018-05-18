@@ -1,9 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
 import FontIcon from 'material-ui/FontIcon';
 import RaisedButton from 'material-ui/RaisedButton';
+
 import Question from './question';
+import { addActionCreator } from '../actions/add-data';
 
 const forwardIcon = <FontIcon className="material-icons">arrow_forward_ios</FontIcon>;
 
@@ -18,6 +21,8 @@ class Section extends React.Component {
     super(props);
     this.state = { questions: [] };
     this.onNextClick = this.onNextClick.bind(this);
+    this.questionCallback = this.questionCallback.bind(this);
+    this.val = {};
   }
 
   componentDidMount() {
@@ -33,11 +38,25 @@ class Section extends React.Component {
 
   onNextClick() {
     this.props.history.push(this.props.nextPage);
+    Object.keys(this.val).forEach((key) => {
+      this.props.dispatchAction(addActionCreator(key, this.val[key]));
+    });
+  }
+
+  questionCallback(id, value) {
+    this.val[id] = value;
   }
 
   render() {
-    const questions = this.state.questions.map((data, i) => (
-      <Question question={data.question} ident={data.id} options={data.options} key={i} />
+    const questions = this.state.questions.map(data => (
+      <Question
+        question={data.question}
+        id={data.id}
+        options={data.options}
+        key={data.id}
+        callback={this.questionCallback}
+        value={this.props.data[data.id] ? this.props.data[data.id] : -1}
+      />
     ));
 
     return (
@@ -57,4 +76,12 @@ class Section extends React.Component {
   }
 }
 
-export default Section;
+const mapStateToProps = state => ({
+  data: state.data,
+});
+
+const mapDispatchToProps = dispatch => ({
+  dispatchAction: action => dispatch(action),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Section);
