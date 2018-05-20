@@ -3,7 +3,7 @@ const timeSlotData = '2.5';
 const cardType = '2.6';
 
 // Data value
-const studentCard = 3;
+const studentCard = 2;
 
 export {
   timeSlotData,

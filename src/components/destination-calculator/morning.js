@@ -9,9 +9,9 @@ import Chip from 'material-ui/Chip';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
 
-import { addActionCreator } from '../actions/add-data';
-import { cardType, studentCard } from '../constants/questions';
-import { morning1, morning2, evening1, evening2 } from '../constants/timePeriod';
+import { addActionCreator } from '../../actions/add-data';
+import { cardType, studentCard } from '../../constants/questions';
+import { morning1, morning2 } from '../../constants/timePeriod';
 
 const forwardIcon = <FontIcon className="material-icons">arrow_forward_ios</FontIcon>;
 
@@ -27,24 +27,27 @@ const paperStyleNext = {
 };
 
 
-class DestinationCalculator extends React.Component {
+class DestinationCalculatorMorning extends React.Component {
   constructor(props) {
     super(props);
-    this.dist_fare = {
 
-    };
+    this.dist_fare = {};
     this.state = {
       originValue: 0,
       destinationValue: 0,
       arrivalTimeHour: 0,
       arrivalTimeMinute: 0,
-      fare: 0,
+      fare: 15,
       distance: 0,
       numStations: 0,
       dist_fare: {
         stations: [],
       },
     };
+
+    if (props.data[cardType] === studentCard) {
+      this.state.fare = 15 - (15 * 0.2);
+    }
 
     this.handleOriginSelect = this.handleOriginSelect.bind(this);
     this.handleDestinationSelect = this.handleDestinationSelect.bind(this);
@@ -55,6 +58,11 @@ class DestinationCalculator extends React.Component {
     Object.keys(this.state).forEach((key) => {
       if (this.props.data[key]) this.state[key] = this.props.data[key];
     });
+
+    // Do we need to stay in the page?
+    if (![0, 2].includes(props.data['2.5']) || props.data['2.6'] === 3) {
+      props.history.push('/destination-calculator/evening');
+    }
   }
 
   componentDidMount() {
@@ -69,36 +77,43 @@ class DestinationCalculator extends React.Component {
   }
 
   onNextClick() {
+    const keyIndexMap = {
+      originValue: '3.1.1',
+      destinationValue: '3.1.2',
+      arrivalTimeHour: '3.1.6 hour',
+      arrivalTimeMinute: '3.1.6 minutes',
+      fare: '3.1.5',
+      distance: '3.1.4',
+      numStations: '3.1.3',
+    };
+    if (Object.keys(this.state).length - 1 !== Object.keys(keyIndexMap).length) {
+      alert('Please answer all questions.'); // eslint-disable-line no-alert
+      return;
+    }
+
     const timePeriod = [];
     const time = (this.state.arrivalTimeHour * 100) + this.state.arrivalTimeMinute;
 
+    // morning period 1
     if (time >= 700 &&
       time <= 830) {
       timePeriod.push(morning1);
     }
 
+    // morning period 2
     if (time >= 730 &&
       time <= 900) {
       timePeriod.push(morning2);
     }
 
-    if (time >= 1700 &&
-      time <= 1900) {
-      timePeriod.push(evening1);
-    }
 
-    if (time >= 1800 &&
-      time <= 2000) {
-      timePeriod.push(evening2);
-    }
+    this.props.addToData('timePeriodMorning', timePeriod);
 
-    this.props.addToData('timePeriod', timePeriod);
-    this.props.addToData('timePeriodIndex', 0);
     Object.keys(this.state).forEach((key) => {
-      if (key !== 'dist_fare') this.props.addToData(key, this.state[key]);
+      if (key !== 'dist_fare') this.props.addToData(keyIndexMap[key], this.state[key]);
     });
 
-    this.props.history.push(this.props.nextPage);
+    this.props.history.push('/discount-calculator/morning1');
   }
 
   handleOriginSelect(event, index, value) {
@@ -114,8 +129,8 @@ class DestinationCalculator extends React.Component {
       fare = this.state.dist_fare.fare[value][this.state.destinationValue];
     }
 
-    if (this.props.cardType === studentCard) {
-      fare -= (fare * (20 / 100));
+    if (this.props.data[cardType] === studentCard) {
+      fare -= (fare * 0.2);
     }
 
     this.setState({
@@ -170,6 +185,7 @@ class DestinationCalculator extends React.Component {
     return (
       <div>
         <Paper zDepth={1} style={paperStyle}>
+          <h2>Morning</h2>
           <h4>Origin</h4>
           <SelectField
             fullWidth
@@ -235,4 +251,4 @@ const mapDispatchToProps = dispatch => ({
   addToData: (id, value) => dispatch(addActionCreator(id, value)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DestinationCalculator);
+export default connect(mapStateToProps, mapDispatchToProps)(DestinationCalculatorMorning);

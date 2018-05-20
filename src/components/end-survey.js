@@ -17,6 +17,13 @@ const paperStyle = {
   textAlign: 'center',
 };
 
+const count = names =>
+  names.reduce((a, b) =>
+    Object.assign(a, { [b]: (a[b] || 0) + 1 }), {});
+
+const duplicates = dict =>
+  Object.keys(dict).filter(a => dict[a] > 1);
+
 class Section extends React.Component {
   constructor(props) {
     super(props);
@@ -40,7 +47,6 @@ class Section extends React.Component {
         'option 2',
         'option 3',
         'option 4',
-        'option 5',
       ],
     },
     ];
@@ -53,10 +59,19 @@ class Section extends React.Component {
   }
 
   onNextClick() {
-    this.props.history.push(this.props.nextPage);
-    Object.keys(this.val).forEach((key) => {
-      this.props.dispatchAction(addActionCreator(key, this.val[key]));
-    });
+    if (this.val.question1 === undefined ||
+      Object.keys(this.state.ratings).length !== this.questions[1].options.length) {
+      alert('Please answers all questions.'); // eslint-disable-line no-alert
+      return;
+    }
+    if (duplicates(count(Object.keys(this.state.ratings).map(key =>
+      this.state.ratings[key]))).length > 0) {
+      alert('Select different ratings for factors.'); // eslint-disable-line no-alert
+    } else {
+      this.props.addToData('5.1', this.val.question1);
+      this.props.addToData('5.2', this.state.ratings);
+      this.props.history.push(this.props.nextPage);
+    }
   }
 
   onStarClick(nVal, pVal, n) {
@@ -78,8 +93,8 @@ class Section extends React.Component {
         <ListItem disabled key={index} index={index}>
           {text} &nbsp; &nbsp;
           <StarRatingComponent
-            name={index}
-            starCount={5}
+            name={`${index}`}
+            starCount={4}
             value={this.state.ratings[index]}
             onStarClick={this.onStarClick}
           />
@@ -90,14 +105,14 @@ class Section extends React.Component {
       <div>
         <Question
           question={this.questions[0].question}
-          id={this.questions[0].id}
+          id="question1"
           options={this.questions[0].options}
           key={this.questions[0].id}
           callback={this.questionCallback}
         />
         <Question
           question={this.questions[1].question}
-          id={this.questions[1].id}
+          id="question2"
           options={[]}
           key={this.questions[1].id}
           callback={this.questionCallback}
@@ -122,7 +137,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatchAction: action => dispatch(action),
+  addToData: (id, value) => dispatch(addActionCreator(id, value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Section);

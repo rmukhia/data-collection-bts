@@ -37,6 +37,10 @@ class Section extends React.Component {
   }
 
   onNextClick() {
+    if (this.state.questions.length !== Object.keys(this.val).length) {
+      alert('Please answer all questions.'); // eslint-disable-line no-alert
+      return;
+    }
     this.props.history.push(this.props.nextPage);
     Object.keys(this.val).forEach((key) => {
       this.props.dispatchAction(addActionCreator(key, this.val[key]));
