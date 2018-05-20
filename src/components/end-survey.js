@@ -5,6 +5,7 @@ import FontIcon from 'material-ui/FontIcon';
 import RaisedButton from 'material-ui/RaisedButton';
 import StarRatingComponent from 'react-star-rating-component';
 import { ListItem } from 'material-ui/List';
+import sendRequest from '../utils/send-request';
 
 import Question from './question';
 import { addActionCreator } from '../actions/add-data';
@@ -70,6 +71,7 @@ class Section extends React.Component {
     } else {
       this.props.addToData('5.1', this.val.question1);
       this.props.addToData('5.2', this.state.ratings);
+      sendRequest(this.props.data);
       this.props.history.push(this.props.nextPage);
     }
   }

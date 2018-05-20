@@ -62,7 +62,7 @@ class ReasonCalculatorMorning2 extends React.Component {
 
   generateRequiredIncides() {
     let result = [0, 1];
-    this.props.data.answers_morning1.forEach((element) => {
+    this.props.data.answers_morning2.forEach((element) => {
       if (element[0] === 1) {
         // don't ask before question
         result = result.filter(elem => elem !== 0);
