@@ -44,10 +44,13 @@ class Section extends React.Component {
       alert('Please answer all questions.'); // eslint-disable-line no-alert
       return;
     }
-    this.props.history.push(this.props.nextPage);
     Object.keys(this.val).forEach((key) => {
       this.props.dispatchAction(addActionCreator(key, this.val[key]));
     });
+    Object.keys(this.text).forEach((key) => {
+      this.props.dispatchAction(addActionCreator(key, this.text[key]));
+    });
+    this.props.history.push(this.props.nextPage);
   }
 
   handleTextChange(id, str) {

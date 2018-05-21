@@ -36,8 +36,30 @@ function buildOptions(timePeriod, data, isStudent) {
 
   return random.map((value) => {
     const discount = discounts[value];
-    const normalFare = data['3.1.5'];
-    const discountFare = normalFare - (normalFare * (discount / 100));
+    let normalFare = [morning1, morning2].includes(timePeriod) ?
+      data['3.1.5'] : data['4.1.5'];
+    normalFare = normalFare.toFixed(2);
+    const normalFareActual = [morning1, morning2].includes(timePeriod) ?
+      data.fareIntermediateMorning : data.fareIntermediateEvening;
+    let discountFare = normalFareActual - (normalFareActual * (discount / 100));
+    discountFare = discountFare.toFixed(2);
+
+    let arrivalTime = 'Arrival Time: ';
+    if ([morning1, morning2].includes(timePeriod)) {
+      const date = new Date();
+      date.setSeconds(0);
+      date.setMinutes(data['3.1.6 minutes']);
+      date.setHours(data['3.1.6 hour']);
+      arrivalTime += date.toLocaleTimeString();
+    } else {
+      const date = new Date();
+      date.setSeconds(0);
+      date.setMinutes(data['4.1.6 minutes']);
+      date.setHours(data['4.1.6 hour']);
+      arrivalTime += date.toLocaleTimeString();
+    }
+
+
     const question = `If given ${discount}% discount of normal fare ${normalFare} bhat to ${discountFare} bhat then`;
     const options = [
       `Shift to before ${time.before}`,
@@ -47,7 +69,7 @@ function buildOptions(timePeriod, data, isStudent) {
     ];
 
     return {
-      normalFare, discountFare, question, options, timePeriod, discount, value,
+      normalFare, discountFare, question, options, timePeriod, discount, value, arrivalTime,
     };
   });
 }

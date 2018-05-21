@@ -38,6 +38,7 @@ class DestinationCalculatorMorning extends React.Component {
       arrivalTimeHour: 0,
       arrivalTimeMinute: 0,
       fare: 15,
+      fareIntermediate: 15,
       distance: 0,
       numStations: 0,
       dist_fare: {
@@ -85,6 +86,7 @@ class DestinationCalculatorMorning extends React.Component {
       fare: '3.1.5',
       distance: '3.1.4',
       numStations: '3.1.3',
+      fareIntermediate: 'fareIntermediateMorning',
     };
     if (Object.keys(this.state).length - 1 !== Object.keys(keyIndexMap).length) {
       alert('Please answer all questions.'); // eslint-disable-line no-alert
@@ -120,6 +122,7 @@ class DestinationCalculatorMorning extends React.Component {
     const numStations = Math.abs(this.state.destinationValue - value);
     let distance = 0;
     let fare = 0;
+    let fareIntermediate = 0;
 
     if (this.state.dist_fare.distance) {
       distance = this.state.dist_fare.distance[value][this.state.destinationValue];
@@ -128,6 +131,9 @@ class DestinationCalculatorMorning extends React.Component {
     if (this.state.dist_fare.distance) {
       fare = this.state.dist_fare.fare[value][this.state.destinationValue];
     }
+
+    fareIntermediate = fare;
+
 
     if (this.props.data[cardType] === studentCard) {
       fare -= (fare * 0.2);
@@ -138,6 +144,7 @@ class DestinationCalculatorMorning extends React.Component {
       numStations,
       distance,
       fare,
+      fareIntermediate,
     });
   }
 
@@ -145,6 +152,7 @@ class DestinationCalculatorMorning extends React.Component {
     const numStations = Math.abs(this.state.originValue - value);
     let distance = 0;
     let fare = 0;
+    let fareIntermediate = 0;
 
     if (this.state.dist_fare.distance) {
       distance = this.state.dist_fare.distance[this.state.originValue][value];
@@ -153,6 +161,8 @@ class DestinationCalculatorMorning extends React.Component {
     if (this.state.dist_fare.distance) {
       fare = this.state.dist_fare.fare[this.state.originValue][value];
     }
+
+    fareIntermediate = fare;
 
     if (this.props.cardType === studentCard) {
       fare -= (fare * (20 / 100));
@@ -163,6 +173,7 @@ class DestinationCalculatorMorning extends React.Component {
       numStations,
       distance,
       fare,
+      fareIntermediate,
     });
   }
 
@@ -216,7 +227,7 @@ class DestinationCalculatorMorning extends React.Component {
             value={this.state.arrivalTimeHour}
             onChange={this.handleHourSelect}
           >
-            {_.range(0, 24).map((value, index) =>
+            {_.range(6, 11).map((value, index) =>
               (<MenuItem value={value} key={index} primaryText={`${value} hours`} />))}
           </SelectField>
           &nbsp;

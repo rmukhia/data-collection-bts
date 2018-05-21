@@ -131,6 +131,9 @@ class ReasonCalculatorMorning2 extends React.Component {
 
       return (
         <div>
+          <Paper zDepth={1} style={paperStyleNext}>
+            <h1> Morning Period 2 </h1>
+          </Paper>
           <Question
             question={currData.question}
             options={currData.options}

@@ -123,7 +123,8 @@ class DiscountCalculatorMorning2 extends React.Component {
     return (
       <div>
         <Paper zDepth={1} style={paperStyleNext}>
-          <h1> Morning Slot </h1>
+          <h1> Morning Period 2 </h1>
+          <h2> {currData.arrivalTime} </h2>
         </Paper>
         <Question
           question={currData.question}
