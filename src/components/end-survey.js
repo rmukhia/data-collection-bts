@@ -80,7 +80,7 @@ class Section extends React.Component {
       )).then((response) => {
         if (response.statusText === 'OK') alert('บันทึกข้อมูลเรียบร้อยแล้ว ขอบคุณสำหรับการทำแบบสอบถามครั้งนี้ค่ะ :) '); // eslint-disable-line no-alert
       }).catch(() => {
-        alert('กลับสู่หน้าหลัก'); // eslint-disable-line no-alert
+        alert('มีข้อผิดพลาดบางอย่าง ไม่สามารถทำการบรรทึกข้อมูลได้'); // eslint-disable-line no-alert
       }).finally(() => {
         this.props.history.push(this.props.nextPage);
       });
