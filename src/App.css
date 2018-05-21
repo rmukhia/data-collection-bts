@@ -15,7 +15,7 @@
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 0.5em;
 }
 
 .App-intro {
@@ -25,4 +25,22 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.optionImage {
+  max-height: 60px;
+  max-width: auto;
+}
+
+.headerImage {
+  width: 100%;
+}
+
+.bodyImage {
+  max-width: 100%;
+  max-height: auto;
+}
+
+.centre-child {
+  text-align: center;
 }

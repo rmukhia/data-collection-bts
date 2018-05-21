@@ -33,21 +33,21 @@ class Section extends React.Component {
     this.questionCallback = this.questionCallback.bind(this);
     this.questions = [{
       id: '5.1',
-      question: 'bla bla 7-9 --- 17-20',
+      question: 'ท่านคิดว่าหากมีการลดราคาค่าโดยสารนอกชั่วโมงเร่งด่วนจะสามารถ ลดปัญหาความแออัด ในช่วงเช้าเวลา  07.00-09.00 น. และ ช่วงเย็นเวลา 17.00-20.00 น.  ได้หรือไม่ ',
       options: [
-        'option 1',
-        'option 2',
-        'option 3',
+        'อาจจะ สามารถลดปัญหาความแออัดได้',
+        'สามารถ ลดปัญหาความแออัดได้',
+        'ไม่สามารถลดปัญหาความแออัดได้',
       ],
     },
     {
       id: '5.2',
-      question: 'review 1 to 5',
+      question: 'ท่านคิดว่าปัจจัยใดดังต่อไปนี้ ที่สามารถช่วยลดปัญหาความแออัดในช่วงเวลา ชม. เร่งด่วนได้ (กรุณาให้คะแนน 1-4 โดย 4 หมายถึงเห็นด้วยมากที่สุด)',
       options: [
-        'option 1',
-        'option 2',
-        'option 3',
-        'option 4',
+        'ไม่มีการเข้า ออกงาน/เรียน ในเวลาที่แน่นอน',
+        'การเพิ่มราคาค่าโดยสารใน ชม. เร่งด่วน',
+        'การลดราคาค่าโดยสารนอก ชม. เร่งด่วน',
+        'การเพิ่มขบวนรถให้เพิ่มขึ้นจากเดิม',
       ],
     },
     ];
@@ -62,12 +62,12 @@ class Section extends React.Component {
   onNextClick() {
     if (this.val.question1 === undefined ||
       Object.keys(this.state.ratings).length !== this.questions[1].options.length) {
-      alert('Please answers all questions.'); // eslint-disable-line no-alert
+      alert('กรุณาตอบคำถามให้ครบทุกข้อด้วยค่ะ'); // eslint-disable-line no-alert
       return;
     }
     if (duplicates(count(Object.keys(this.state.ratings).map(key =>
       this.state.ratings[key]))).length > 0) {
-      alert('Select different ratings for factors.'); // eslint-disable-line no-alert
+      alert('กรุณาให้ระดับความสำคัญ 1-4 ที่ระดับแตกต่างกัน'); // eslint-disable-line no-alert
     } else {
       this.props.addToData('5.1', this.val.question1);
       this.props.addToData('5.2', this.state.ratings);
@@ -78,9 +78,9 @@ class Section extends React.Component {
           5.2: this.state.ratings,
         },
       )).then((response) => {
-        if (response.statusText === 'OK') alert('Successful entry'); // eslint-disable-line no-alert
+        if (response.statusText === 'OK') alert('บันทึกข้อมูลเรียบร้อยแล้ว ขอบคุณสำหรับการทำแบบสอบถามครั้งนี้ค่ะ :) '); // eslint-disable-line no-alert
       }).catch(() => {
-        alert('Error in entry'); // eslint-disable-line no-alert
+        alert('กลับสู่หน้าหลัก'); // eslint-disable-line no-alert
       }).finally(() => {
         this.props.history.push(this.props.nextPage);
       });
@@ -133,7 +133,7 @@ class Section extends React.Component {
         />
         <Paper zDepth={2} style={paperStyle}>
           <RaisedButton
-            label="End Survey"
+            label="สิ้นสุดการทำแบบสอบถาม"
             labelPosition="after"
             onClick={this.onNextClick}
             primary

@@ -7,12 +7,12 @@ function buildTimePeriod(timePeriod) {
   const time = {};
   switch (timePeriod) {
     case morning1:
-      time.before = '7:00';
-      time.after = '8:30';
+      time.before = '07:00';
+      time.after = '08:30';
       break;
     case morning2:
-      time.before = '7:30';
-      time.after = '9:00';
+      time.before = '07:30';
+      time.after = '09:00';
       break;
     case evening1:
       time.before = '17:00';
@@ -44,7 +44,7 @@ function buildOptions(timePeriod, data, isStudent) {
     let discountFare = normalFareActual - (normalFareActual * (discount / 100));
     discountFare = discountFare.toFixed(2);
 
-    let arrivalTime = 'Arrival Time: ';
+    let arrivalTime = 'เวลาโดยประมาณที่ท่านเดินทางมาถึงสถานี: ';
     if ([morning1, morning2].includes(timePeriod)) {
       const date = new Date();
       date.setSeconds(0);
@@ -60,16 +60,25 @@ function buildOptions(timePeriod, data, isStudent) {
     }
 
 
-    const question = `If given ${discount}% discount of normal fare ${normalFare} bhat to ${discountFare} bhat then`;
+    const question = `หากมีการปรับลดราคาค่าโดยสารลง ${discount}% จากราคาเดิมที่ท่านจ่ายต่อเที่ยว ${normalFare} บาท เหลือเพียง ${discountFare} บาทต่อเที่ยว`;
+    const subquestion = `ท่านสนใจเลื่อนเวลาการเดินทางในการใช้บริการรถไฟฟ้าแอร์พอร์ตลิงก์ ออกจากเวลา ${time.before}-${time.after} น. เพื่อรับผลประโยชน์ด้านการลดราคา หรือไม่`;
     const options = [
-      `Shift to before ${time.before}`,
-      `Shift to after ${time.after}`,
-      'Shift both time',
-      'Not shift the time',
+      `สนใจ และสามารถเลื่อนเวลาการเดินทาง เป็นก่อน ${time.before} น.ได้`,
+      `สนใจ และสามารถเลื่อนเวลาการเดินทาง เป็นหลัง ${time.after} น.ได้`,
+      `สนใจ และสามารถ เลื่อนเวลาการเดินทาง ทั้งก่อน ${time.before} น.และ หลัง ${time.after} น.ได้`,
+      'ไม่สนใจเลื่อนเวลาการเดินทางออกจากช่วงเวลาที่กำหนด',
     ];
 
     return {
-      normalFare, discountFare, question, options, timePeriod, discount, value, arrivalTime,
+      normalFare,
+      discountFare,
+      question,
+      subquestion,
+      options,
+      timePeriod,
+      discount,
+      value,
+      arrivalTime,
     };
   });
 }

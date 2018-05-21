@@ -90,7 +90,7 @@ class DestinationCalculatorEvening extends React.Component {
     };
 
     if (Object.keys(this.state).length - 1 !== Object.keys(keyIndexMap).length) {
-      alert('Please answer all questions.'); // eslint-disable-line no-alert
+      alert('กรุณาตอบคำถามให้ครบทุกข้อด้วยค่ะ'); // eslint-disable-line no-alert
       return;
     }
     const timePeriod = [];
@@ -193,54 +193,56 @@ class DestinationCalculatorEvening extends React.Component {
 
     return (
       <div>
+        <Paper zDepth={1} style={paperStyleNext}>
+          <h3>ข้อมูลการเดินทางในช่วงเย็น</h3>
+        </Paper>
+        <div className="centre-child">
+          <img src="/images/station.jpg" alt="" className="bodyImage" />
+        </div>
         <Paper zDepth={1} style={paperStyle}>
-          <h2>Evening</h2>
-          <h4>Origin</h4>
+          <h4>สถานี ต้นทาง ที่ท่านใช้เดินทางเป็นประจำ คือ</h4>
           <SelectField
             fullWidth
-            floatingLabelText="Station"
+            floatingLabelText="สถานี"
             value={this.state.originValue}
             onChange={this.handleOriginSelect}
           >
             {origin}
           </SelectField>
-          <h4>Destination</h4>
+          <h4>สถานี ปลายทาง ที่ท่านใช้เดินทางเป็นประจำ คือ</h4>
           <SelectField
             fullWidth
-            floatingLabelText="Destination"
+            floatingLabelText="สถานี"
             value={this.state.destinationValue}
             onChange={this.handleDestinationSelect}
           >
             {destination}
           </SelectField>
-          <h4>Number of stations from origin to destination</h4>
-          <Chip>{this.state.numStations}</Chip>
-          <h4>Distance</h4>
-          <Chip>{this.state.distance} Km.</Chip>
-          <h4>Fare</h4>
-          <Chip>{this.state.fare} bhat</Chip>
-          <h4>Arrival Time</h4>
+          <h4>จำนวนสถานี  <Chip>{this.state.numStations}</Chip> สถานี </h4>
+          <h4>ระยะทางในการเดินทาง <Chip>{this.state.distance} </Chip> กิโลเมตร</h4>
+          <h4>ค่าโดยสารปัจจุบันของท่าน <Chip>{this.state.fare} </Chip> บาท </h4>
+          <h4>เวลาโดยประมาณที่เดินทางมาใช้บริการรถไฟฟ้าแอร์พอร์ต เรล ลิ้งก์ ในช่วงเย็น</h4>
           <SelectField
-            floatingLabelText="Hour"
+            floatingLabelText="นาฬิกา"
             value={this.state.arrivalTimeHour}
             onChange={this.handleHourSelect}
           >
             {_.range(16, 22).map((value, index) =>
-              (<MenuItem value={value} key={index} primaryText={`${value} hours`} />))}
+              (<MenuItem value={value} key={index} primaryText={`${value} นาฬิกา`} />))}
           </SelectField>
           &nbsp;
           <SelectField
-            floatingLabelText="Minute"
+            floatingLabelText="นาที "
             value={this.state.arrivalTimeMinute}
             onChange={this.handleMinuteSelect}
           >
             {_.range(0, 60).map((value, index) =>
-              (<MenuItem value={value} key={index} primaryText={`${value} minutes`} />))}
+              (<MenuItem value={value} key={index} primaryText={`${value} นาที `} />))}
           </SelectField>
         </Paper>
         <Paper zDepth={2} style={paperStyleNext}>
           <RaisedButton
-            label="Next"
+            label="ถัดไป"
             labelPosition="after"
             onClick={this.onNextClick}
             primary

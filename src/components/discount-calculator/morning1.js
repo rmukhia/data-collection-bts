@@ -18,6 +18,10 @@ const paperStyleNext = {
   textAlign: 'center',
 };
 
+const insStyle = {
+  color: '#013BAC',
+};
+
 class DiscountCalculatorMorning1 extends React.Component {
   constructor(props) {
     super(props);
@@ -50,7 +54,7 @@ class DiscountCalculatorMorning1 extends React.Component {
 
   onNextClick() {
     if (this.state.value.value < 0) {
-      alert('Please answer all questions.'); // eslint-disable-line no-alert
+      alert('กรุณาตอบคำถามให้ครบทุกข้อด้วยค่ะ'); // eslint-disable-line no-alert
       return;
     }
     // update answers
@@ -122,11 +126,22 @@ class DiscountCalculatorMorning1 extends React.Component {
     return (
       <div>
         <Paper zDepth={1} style={paperStyleNext}>
-          <h1> Morning Period 1 </h1>
-          <h2> {currData.arrivalTime} </h2>
+          <h3>แบบทดสอบช่วงเวลาเร่งด่วนช่วงเช้า ช่วงที่ 1 (07.00-08.30 น.)</h3>
+          <h3> {currData.arrivalTime} </h3>
+        </Paper>
+        <Paper zDepth={1} style={paperStyleNext}>
+          <p style={insStyle}>
+            ในการเดินทางไปยังจุดหมายปลายทางของท่าน สมมุติว่าค่าโดยสารในการเดินทางโดยใช้
+            รถไฟฟ้าแอร์พอร์ต เรล ลิงก์ มีการปรับลดราคาลง
+            เนื่องจากต้องการลดปัญหาความแออัดในชั่วโมงเร่งด่วน
+            หากท่านมีทางเลือกโดยการเปลี่ยนเวลาการเดินทางออกนอกชั่วโมงเร่งด่วน
+            เพื่อได้รับผลประโยชน์จากการลดราคาค่าโดยสารจากกรณีต่างๆดังต่อไปนี้ท่านจะเลื่อนเ
+            วลาการเดินทางออกนอกชั่วโมงเร่งด่วน
+            เพื่อรับผลประโยชน์ด้านการลดราคาหรือไม่
+          </p>
         </Paper>
         <Question
-          question={currData.question}
+          question={<div>{currData.question}<br />{currData.subquestion}</div>}
           options={options}
           id={JSON.stringify(id)}
           value={-1}
@@ -135,7 +150,7 @@ class DiscountCalculatorMorning1 extends React.Component {
         />
         <Paper zDepth={2} style={paperStyleNext}>
           <RaisedButton
-            label="Next"
+            label="ถัดไป"
             labelPosition="after"
             onClick={this.onNextClick}
             primary

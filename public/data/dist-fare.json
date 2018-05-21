@@ -1,7 +1,7 @@
 { 
   "stations": [
-    "Pata Thai", "Ratchaprarop", "Makkasan", "Ramkhamhaeng", "Hua Mak",
-    "Ban Thap Chang", "Lat Krabang", "Suvarnabhumi"
+    "พญาไท", "ราชปรารถ", "มักกะสัน", "รามคำแหง", "หัวหมาก",
+    "บ้านทับช้าง", "ลาดกระบัง", "สุวรรณภูมิ"
   ],
   "distance": [
   [0,	0.8,	3,	7.2,	12.1,	17.1,	23.3,	28.5],

@@ -1,4 +1,5 @@
 import React from 'react';
+import Parser from 'html-react-parser';
 import { List, ListItem } from 'material-ui/List';
 import Checkbox from 'material-ui/Checkbox';
 import Paper from 'material-ui/Paper';
@@ -31,7 +32,6 @@ class Question extends React.Component {
           <h4>{this.props.question}</h4>
           {this.props.options.map((el, index) => (
             <ListItem
-              primaryText={el}
               index={index}
               key={index}
               leftCheckbox={<Checkbox
@@ -42,7 +42,9 @@ class Question extends React.Component {
                 }
               }}
               />}
-            />
+            >
+              {typeof el === 'string' ? Parser(el) : el}
+            </ListItem>
           ))}
           {this.props.child ? this.props.child : null}
         </List>

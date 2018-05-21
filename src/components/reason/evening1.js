@@ -44,7 +44,7 @@ class ReasonCalculatorEvening1 extends React.Component {
     const { currentIndex } = this.state;
     if (currentIndex + 1 >= this.questions.length) {
       if (Object.keys(this.state.data).length !== this.questions.length) {
-        alert('Please answer all questions.'); // eslint-disable-line no-alert
+        alert('กรุณาตอบคำถามให้ครบทุกข้อด้วยค่ะ'); // eslint-disable-line no-alert
       } else {
         Object.keys(this.state.data).forEach((key) => {
           const ques = this.questions.find(e => e.id === key);
@@ -80,16 +80,16 @@ class ReasonCalculatorEvening1 extends React.Component {
   buildQuestions() {
     return [ // morning 1
       {
-        question: 'Not shift to before 17.00 why?',
+        question: 'กรุณาระบุเหตุผลที่ท่านไม่สามารถเลื่อนเวลาการเดินทางเป็นก่อนเวลา 17.00 น. ได้',
         options: [
-          'option 1',
-          'option 2',
-          'option 3',
-          'option 4',
-          'option 5',
-          'option 6',
+          'มีภาระด้านครอบครัว',
+          'มีเวลาการออก งาน หรือ เลิกเรียน ที่แน่นอน',
+          'มีเวลาการนัดหมายที่แน่นอน',
+          'เนื่องจากไม่มีความยืดหยุ่นทางด้านการเดินทาง เช่น ต้องไปต่อรถที่มีเวลาการให้บริการที่แน่นอน',
+          'เป็นช่วงที่รถไฟฟ้าแอร์พอร์ต เรล ลิงก์ มีความหนาแน่นมาก',
+          'การลดราคาไม่มีความจูงใจมากพอ',
           <TextField
-            hintText="Other Reasons"
+            hintText="อื่น ๆ"
             fullWidth
             onChange={(e, str) => this.handleTextChange('4.2.7', str)}
           />,
@@ -99,14 +99,14 @@ class ReasonCalculatorEvening1 extends React.Component {
       {
         question: 'Not shift to after 19.00 why?',
         options: [
-          'option 1',
-          'option 2',
-          'option 3',
-          'option 4',
-          'option 5',
-          'option 6',
+          'มีภาระด้านครอบครัว',
+          'มีเวลาการออก งาน หรือ เลิกเรียน ที่แน่นอน',
+          'มีเวลาการนัดหมายที่แน่นอน ',
+          'เนื่องจากไม่มีความยืดหยุ่นทางด้านการเดินทาง เช่น ต้องไปต่อรถที่มีเวลาการให้บริการที่แน่นอน',
+          'เป็นช่วงที่รถไฟฟ้าแอร์พอร์ต เรล ลิงก์ มีความหนาแน่นมาก',
+          'การลดราคาไม่มีความจูงใจมากพอ',
           <TextField
-            hintText="Other Reasons"
+            hintText="อื่น ๆ"
             fullWidth
             onChange={(e, str) => this.handleTextChange('4.2.8', str)}
           />,
@@ -129,7 +129,7 @@ class ReasonCalculatorEvening1 extends React.Component {
       return (
         <div>
           <Paper zDepth={1} style={paperStyleNext}>
-            <h1> Evening Period 1 </h1>
+            <h3>แบบทดสอบช่วงเวลาเร่งด่วนช่วงเย็น ช่วงที่ 1 (17.00-19.00 น.)</h3>
           </Paper>
           <Question
             question={currData.question}
@@ -141,7 +141,7 @@ class ReasonCalculatorEvening1 extends React.Component {
           />
           <Paper zDepth={2} style={paperStyleNext}>
             <RaisedButton
-              label="Next"
+              label="ถัดไป"
               labelPosition="after"
               onClick={this.onNextClick}
               primary

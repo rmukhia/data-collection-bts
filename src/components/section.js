@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Parser from 'html-react-parser';
 import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
 import FontIcon from 'material-ui/FontIcon';
@@ -41,7 +42,7 @@ class Section extends React.Component {
 
   onNextClick() {
     if (this.state.questions.length !== Object.keys(this.val).length) {
-      alert('Please answer all questions.'); // eslint-disable-line no-alert
+      alert('กรุณาตอบคำถามให้ครบทุกข้อด้วยค่ะ'); // eslint-disable-line no-alert
       return;
     }
     Object.keys(this.val).forEach((key) => {
@@ -79,7 +80,7 @@ class Section extends React.Component {
   render() {
     const questions = this.state.questions.map(data => (
       <Question
-        question={data.question}
+        question={Parser(data.question)}
         id={data.id}
         options={data.options}
         key={data.id}
@@ -90,10 +91,13 @@ class Section extends React.Component {
 
     return (
       <div>
+        <Paper zDepth={1} style={paperStyle}>
+          <h3>{this.props.topic}</h3>
+        </Paper>
         {questions}
         <Paper zDepth={2} style={paperStyle}>
           <RaisedButton
-            label="Next"
+            label="ถัดไป"
             labelPosition="after"
             onClick={this.onNextClick}
             primary

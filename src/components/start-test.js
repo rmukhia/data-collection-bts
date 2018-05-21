@@ -44,20 +44,23 @@ class Start extends React.Component {
     return (
       <div>
         <Paper zDepth={1} style={paperStyleNext}>
+        <p>แบบสำรวจพฤติกรรมของผู้ใช้บริการรถไฟฟ้าแอร์พอร์ต เรล ลิงก์ ต่อการลดราคาค่าโดยสารนอกช่วงเวลาชั่วโมงเร่งด่วน</p>
+          <p>เพื่อลดความแออัดในช่วงเวลาชั่วโมงเร่งด่วน</p>
+          <br/>
           <TextField
-            hintText="Data Collector Name"
+            hintText="ชื่อผู้เก็บข้อมูล สำหรับผู้เก็บข้อมูล"
             value={this.state.collector}
             onChange={(e, str) => this.onTextChange('collector', str)}
           /><br />
           <TextField
-            hintText="Data Collection Location"
+            hintText="ตำแหน่งที่ทำการสำรวจ"
             value={this.state.location}
             onChange={(e, str) => this.onTextChange('location', str)}
           /><br />
         </Paper>
         <Paper zDepth={2} style={paperStyleNext}>
           <RaisedButton
-            label="Start"
+            label="เริ่มทำแบบสอบถาม"
             labelPosition="after"
             onClick={this.onNextClick}
             primary
