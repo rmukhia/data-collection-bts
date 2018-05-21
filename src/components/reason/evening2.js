@@ -49,10 +49,9 @@ class ReasonCalculatorEvening2 extends React.Component {
         Object.keys(this.state.data).forEach((key) => {
           const ques = this.questions.find(e => e.id === key);
           if (ques.options.length === this.state.data[key] + 1) {
-            this.props.addToData(key, this.text[key]);
-          } else {
-            this.props.addToData(key, this.state.data[key]);
+            this.props.addToData(`${key}_other`, this.text[key]);
           }
+          this.props.addToData(key, this.state.data[key]);
         });
         this.props.history.push('/end');
       }
@@ -82,7 +81,7 @@ class ReasonCalculatorEvening2 extends React.Component {
   buildQuestions() {
     return [ // evening 2
       {
-        question: 'Not shift to before 7.00 why?',
+        question: 'Not shift to before 18.00 why?',
         options: [
           'option 1',
           'option 2',
@@ -99,7 +98,7 @@ class ReasonCalculatorEvening2 extends React.Component {
         id: '4.3.7',
       },
       {
-        question: 'Not shift to after 8.30 why?',
+        question: 'Not shift to after 20.00 why?',
         options: [
           'option 1',
           'option 2',

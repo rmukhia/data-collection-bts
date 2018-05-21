@@ -4,10 +4,13 @@ export default {
   education: '',
   status: '',
   occupation: '',
+  occupation_other: '',
   income: '',
   No_of_passenger: '',
   Mode_access: '',
+  Mode_access_other: '',
   purpose: '',
+  purpose_other: '',
   'Frequency/Week': '',
   card_type: '',
   use_in_peak_hour: '',
@@ -45,7 +48,9 @@ export default {
   // Not_change_time_40_percent_morning_1: '',
 
   Reason_for_not_before_7_00_morning_1: '',
+  Reason_for_not_before_7_00_morning_1_other: '',
   Reason_for_not_after_8_30_morning_1: '',
+  Reason_for_not_after_8_30_morning_1_other: '',
   minimum_discount_morning_1: '',
 
   // morning slot 2
@@ -73,7 +78,9 @@ export default {
   // Not_change_time_40_percent_morning_2: '',
 
   Reason_for_not_before_7_30_morning_2: '',
+  Reason_for_not_before_7_30_morning_2_other: '',
   Reason_for_not_after_9_00_morning_2: '',
+  Reason_for_not_after_9_00_morning_2_other: '',
   minimum_discount_morning_2: '',
 
   // evening
@@ -109,7 +116,9 @@ export default {
   // Not_change_time_40_percent_evening_1: '',
 
   Reason_for_not_before_17_00_evening_1: '',
+  Reason_for_not_before_17_00_evening_1_other: '',
   Reason_for_not_after_19_00_evening_1: '',
+  Reason_for_not_after_19_00_evening_1_other: '',
   minimum_discount_evening_1: '',
 
   // evening slot 2
@@ -127,16 +136,24 @@ export default {
   // Not_change_time_20_percent_evening_2: '',
 
   evening_30_percent_2: 'N',
-  change_before_17_30_30_percent_evening_2: 0,
+  change_before_18_00_30_percent_evening_2: 0,
   change_after_20_00_30_percent_evening_2: 0,
   // Not_change_time_30_percent_evening_2: '',
 
   evening_40_percent_2: 'N',
-  change_before_17_30_40_percent_evening_2: 0,
+  change_before_18_00_40_percent_evening_2: 0,
   change_after_20_00_40_percent_evening_2: 0,
   // Not_change_time_40_percent_evening_2: '',
 
   Reason_for_not_before_17_30_evening_2: '',
+  Reason_for_not_before_17_30_evening_2_other: '',
   Reason_for_not_after_20_00_evening_2: '',
+  Reason_for_not_after_20_00_evening_2_other: '',
   minimum_discount_evening_2: '',
+
+  Opinion: '',
+  factor_1: '',
+  factor_2: '',
+  factor_3: '',
+  factor_4: '',
 };

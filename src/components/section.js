@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
 import FontIcon from 'material-ui/FontIcon';
+import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import Question from './question';
@@ -23,7 +24,9 @@ class Section extends React.Component {
     this.onNextClick = this.onNextClick.bind(this);
     this.questionCallback = this.questionCallback.bind(this);
     this.val = {};
+    this.text = {};
   }
+
 
   componentDidMount() {
     const _this = this;
@@ -32,7 +35,7 @@ class Section extends React.Component {
             axios
               .get(`${process.env.PUBLIC_URL}/data/${_this.props.dataFile}`)
               .then((result) => {
-                _this.setState({ questions: result.data });
+                _this.setState({ questions: this.generateTextOthers(result.data) });
               });
   }
 
@@ -45,6 +48,25 @@ class Section extends React.Component {
     Object.keys(this.val).forEach((key) => {
       this.props.dispatchAction(addActionCreator(key, this.val[key]));
     });
+  }
+
+  handleTextChange(id, str) {
+    this.text[id] = str;
+  }
+
+  generateTextOthers(data) {
+    data.forEach((ques) => {
+      if (ques.hasOthers !== undefined) {
+        const iopt = ques.hasOthers - 1;
+        ques.options[iopt] =
+          (<TextField
+            hintText={ques.options[iopt]}
+            fullWidth
+            onChange={(e, str) => this.handleTextChange(`${ques.id}_other`, str)}
+          />);
+      }
+    });
+    return data;
   }
 
   questionCallback(id, value) {

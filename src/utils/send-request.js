@@ -10,10 +10,13 @@ const qid = {
   education: '1.3',
   status: '1.4',
   occupation: '1.5',
+  occupation_other: '1.5_other',
   income: '1.6',
   No_of_passenger: '2.1',
   Mode_access: '2.2',
+  Mode_access_other: '2.2_other',
   purpose: '2.3',
+  purpose_other: '2.3_other',
   'Frequency/Week': '2.4',
   use_in_peak_hour: '2.5',
   card_type: '2.6',
@@ -145,6 +148,12 @@ const qid = {
   Reason_for_not_before_18_00_evening_2: '4.3.7',
   Reason_for_not_after_20_00_evening_2: '4.3.8',
   minimum_discount_evening_2: NA,
+
+  Opinion: '5.1',
+  factor_1: NA,
+  factor_2: NA,
+  factor_3: NA,
+  factor_4: NA,
 };
 
 const calculateDiscount = (discount, answerMatrix) => {
@@ -173,10 +182,13 @@ const convertor = {
   education: value => value + 1,
   status: value => value + 1,
   occupation: value => value + 1,
+  ccoupation_other: value => value,
   income: value => value + 1,
   No_of_passenger: value => value + 1,
   Mode_access: value => value + 1,
+  Mode_access_other: value => value,
   purpose: value => value + 1,
+  purpose_other: value => value,
   'Frequency/Week': value => value + 1,
   use_in_peak_hour: value => value + 1,
   card_type: value => value + 1,
@@ -420,11 +432,17 @@ const convertor = {
   minimum_discount_evening_2: (value, data) =>
     (data.answers_evening2 !== undefined ?
       findMinimum(data.answers_evening2) : undefined),
+
+  Opinion: value => value + 1,
+  factor_1: (value, data) => data['5.2'][0],
+  factor_2: (value, data) => data['5.2'][1],
+  factor_3: (value, data) => data['5.2'][2],
+  factor_4: (value, data) => data['5.2'][3],
 };
 
 
 export default function (data) {
-  axios.get(`${process.env.PUBLIC_URL}/data/dist-fare.json`)
+  return axios.get(`${process.env.PUBLIC_URL}/data/dist-fare.json`)
     .then((response) => {
       data.distFare = response.data;
       const result = Object.keys(format).reduce((acc, key) => {
@@ -437,6 +455,6 @@ export default function (data) {
         return acc;
       }, {});
 
-      console.log(result); // eslint-disable-line no-console
+      return axios.post(`${process.env.PUBLIC_URL}/datain`, result);
     });
 }

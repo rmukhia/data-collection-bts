@@ -28,9 +28,11 @@ function buildTimePeriod(timePeriod) {
   return time;
 }
 
-function buildOptions(timePeriod, data) {
-  const random = _.shuffle([0, 1, 2, 3]);
+function buildOptions(timePeriod, data, isStudent) {
+  let random = _.shuffle([0, 1, 2, 3]);
   const time = buildTimePeriod(timePeriod);
+
+  if (isStudent) random = _.shuffle([2, 3]);
 
   return random.map((value) => {
     const discount = discounts[value];

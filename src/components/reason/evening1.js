@@ -49,10 +49,9 @@ class ReasonCalculatorEvening1 extends React.Component {
         Object.keys(this.state.data).forEach((key) => {
           const ques = this.questions.find(e => e.id === key);
           if (ques.options.length === this.state.data[key] + 1) {
-            this.props.addToData(key, this.text[key]);
-          } else {
-            this.props.addToData(key, this.state.data[key]);
+            this.props.addToData(`${key}_other`, this.text[key]);
           }
+          this.props.addToData(key, this.state.data[key]);
         });
         this.props.history.push('/discount-calculator/evening2');
       }

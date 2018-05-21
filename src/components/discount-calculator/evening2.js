@@ -7,6 +7,7 @@ import FontIcon from 'material-ui/FontIcon';
 import Question from '../question';
 import { evening2 } from '../../constants/timePeriod';
 import { addActionCreator } from '../../actions/add-data';
+import { cardType, studentCard } from '../../constants/questions';
 import { buildOptions } from '../../utils/build-random-options';
 
 const forwardIcon = <FontIcon className="material-icons">arrow_forward_ios</FontIcon>;
@@ -34,7 +35,13 @@ class DiscountCalculatorEvening2 extends React.Component {
 
     this.optionOptions = [0, 1, 2, 3]; // timeperiod 3
 
-    this.questions = buildOptions(evening2, props.data);
+    const isStudent = props.data[cardType] === studentCard;
+
+    if (isStudent) {
+      this.state.answerMatrix = [[0, 0], [0, 0], [], []];
+    }
+
+    this.questions = buildOptions(evening2, props.data, isStudent);
     // should we move to another page?
     if (!props.data.timePeriodEvening.includes(evening2)) {
       props.history.push('/end');

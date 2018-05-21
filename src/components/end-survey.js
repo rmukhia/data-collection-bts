@@ -71,8 +71,19 @@ class Section extends React.Component {
     } else {
       this.props.addToData('5.1', this.val.question1);
       this.props.addToData('5.2', this.state.ratings);
-      sendRequest(this.props.data);
-      this.props.history.push(this.props.nextPage);
+      sendRequest(Object.assign(
+        {}, this.props.data,
+        {
+          5.1: this.val.question1,
+          5.2: this.state.ratings,
+        },
+      )).then((response) => {
+        if (response.statusText === 'OK') alert('Successful entry'); // eslint-disable-line no-alert
+      }).catch(() => {
+        alert('Error in entry'); // eslint-disable-line no-alert
+      }).finally(() => {
+        this.props.history.push(this.props.nextPage);
+      });
     }
   }
 
@@ -122,7 +133,7 @@ class Section extends React.Component {
         />
         <Paper zDepth={2} style={paperStyle}>
           <RaisedButton
-            label="Next"
+            label="End Survey"
             labelPosition="after"
             onClick={this.onNextClick}
             primary
