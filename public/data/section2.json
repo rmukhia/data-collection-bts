@@ -30,7 +30,7 @@
         "id" : "2.6",
         "question": "ประเภทบัตรโดยสารที่ใช้ในปัจจุบันของท่าน ",
         "options" : [
-            "<img className='optionImage' src='/images/machine.jpg'/> ซื้อเหรียญโดยสารจากตู้จำหน่ายตั๋วอัตโนมัติ", 
+            "<img className='optionImage' src='/images/machine.jpg'/> ซื้อเหรียญโดยสารจากตู้จำหน่ายตั๋วอัตโนมัติ หรือพนักงานจำหน่ายตั๋วโดยสา", 
             "<img className='optionImage' src='/images/adult.jpg'/> บัตรบุคคลทั่วไป (Adult Card)",
             "<img className='optionImage' src='/images/student.jpg'/> บัตรนักเรียน/นักศึกษา (Student Card)", 
             "<img className='optionImage' src='/images/senior.jpg'/> บัตรผู้สูงอายุ (Senior Card)"]

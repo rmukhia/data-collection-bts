@@ -97,7 +97,7 @@ class ReasonCalculatorEvening1 extends React.Component {
         id: '4.2.7',
       },
       {
-        question: 'Not shift to after 19.00 why?',
+        question: 'กรุณาระบุเหตุผลที่ท่านไม่สามารถเลื่อนเวลาการเดินทางหลังเวลา 19.00 น. ได้',
         options: [
           'มีภาระด้านครอบครัว',
           'มีเวลาการออก งาน หรือ เลิกเรียน ที่แน่นอน',

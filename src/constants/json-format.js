@@ -147,8 +147,8 @@ export default {
   change_after_20_00_40_percent_evening_2: 0,
   // not_change_time_40_percent_evening_2: '',
 
-  reason_for_not_before_17_30_evening_2: '',
-  reason_for_not_before_17_30_evening_2_other: '',
+  reason_for_not_before_18_00_evening_2: '',
+  reason_for_not_before_18_00_evening_2_other: '',
   reason_for_not_after_20_00_evening_2: '',
   reason_for_not_after_20_00_evening_2_other: '',
   minimum_discount_evening_2: '',
